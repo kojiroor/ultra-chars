@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { CharacterCard } from '../components/character/CharacterCard';
 import { getCharacters } from '../data/characters';
 
