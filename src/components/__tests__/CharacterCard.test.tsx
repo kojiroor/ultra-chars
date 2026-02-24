@@ -1,39 +1,43 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { CharacterCard } from '../character/CharacterCard';
+import type { Character } from '../../types';
 
-// CharacterCard コンポーネントのテスト
-// 実装前なので、テストは失敗する（TDDアプローチ）
+const mockCharacter: Character = {
+  id: 'test-character',
+  name: 'Test Character',
+  image: '/test-image.png',
+  description: 'Test description',
+};
 
 describe('CharacterCard', () => {
-  const mockCharacter = {
-    id: 'ultraman',
-    name: 'ウルトラマン',
-    image: '/images/ultraman.png',
-    description: 'M78星雲から来た戦士',
-  };
-
-  it('キャラクター名が表示される', async () => {
-    // コンポーネント実装後に有効になる
-    // const { CharacterCard } = await import('../character/CharacterCard');
-    // render(<CharacterCard character={mockCharacter} />);
-    // expect(screen.getByText('ウルトラマン')).toBeInTheDocument();
-    expect(true).toBe(true); // プレースホルダー
+  it('renders character name', () => {
+    render(
+      <MemoryRouter>
+        <CharacterCard character={mockCharacter} />
+      </MemoryRouter>
+    );
+    expect(screen.getByText('Test Character')).toBeInTheDocument();
   });
 
-  it('画像が表示される', async () => {
-    // const { CharacterCard } = await import('../character/CharacterCard');
-    // render(<CharacterCard character={mockCharacter} />);
-    // const img = screen.getByRole('img');
-    // expect(img).toHaveAttribute('src', '/images/ultraman.png');
-    expect(true).toBe(true); // プレースホルダー
+  it('renders character image', () => {
+    render(
+      <MemoryRouter>
+        <CharacterCard character={mockCharacter} />
+      </MemoryRouter>
+    );
+    const img = screen.getByRole('img', { name: 'Test Character' });
+    expect(img).toHaveAttribute('src', '/test-image.png');
   });
 
-  it('カードクリックで詳細ページへの遷移関数が呼ばれる', async () => {
-    // const onClick = vi.fn();
-    // const { CharacterCard } = await import('../character/CharacterCard');
-    // render(<CharacterCard character={mockCharacter} onClick={onClick} />);
-    // fireEvent.click(screen.getByText('ウルトラマン'));
-    // expect(onClick).toHaveBeenCalledWith('ultraman');
-    expect(true).toBe(true); // プレースホルダー
+  it('links to character detail page', () => {
+    render(
+      <MemoryRouter>
+        <CharacterCard character={mockCharacter} />
+      </MemoryRouter>
+    );
+    const link = screen.getByRole('link');
+    expect(link).toHaveAttribute('href', '/characters/test-character');
   });
 });
