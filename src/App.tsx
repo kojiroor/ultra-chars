@@ -18,7 +18,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/ultra-chars">
       <Layout>
         <Routes>
           <Route path="/" element={<TopPage />} />
