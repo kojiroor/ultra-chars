@@ -6,10 +6,10 @@ describe('characters data', () => {
     it('returns paginated characters', () => {
       const result = getCharacters(1, 2);
       expect(result.items).toHaveLength(2);
-      expect(result.total).toBe(3);
+      expect(result.total).toBe(23); // 23 characters in total
       expect(result.page).toBe(1);
       expect(result.pageSize).toBe(2);
-      expect(result.totalPages).toBe(2);
+      expect(result.totalPages).toBe(12);
     });
 
     it('returns correct items for page 2', () => {

@@ -10,7 +10,7 @@ describe('Header', () => {
         <Header />
       </MemoryRouter>
     );
-    expect(screen.getByText('Ultra Character Viewer')).toBeInTheDocument();
+    expect(screen.getByText('ウルトラマン図鑑')).toBeInTheDocument();
   });
 
   it('has link to top page', () => {
@@ -19,7 +19,7 @@ describe('Header', () => {
         <Header />
       </MemoryRouter>
     );
-    const link = screen.getByRole('link', { name: /ultra character viewer/i });
+    const link = screen.getByRole('link', { name: /ウルトラマン図鑑/ });
     expect(link).toHaveAttribute('href', '/');
   });
 });
