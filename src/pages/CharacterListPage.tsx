@@ -17,21 +17,20 @@ export function CharacterListPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+    <div className="min-h-screen bg-[#F5F5F5]">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+        <div className="mb-8 md:mb-12">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
             キャラクター一覧
           </h1>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            歴代ウルトラマンシリーズに登場する光の巨人たち。
-            昭和、平成、新生代を網羅したデータベース。
+          <p className="text-sm md:text-base text-gray-600">
+            歴代ウルトラマンシリーズに登場する光の巨人たち
           </p>
         </div>
 
         {/* Character Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
           {result.items.map((character) => (
             <CharacterCard key={character.id} character={character} />
           ))}
@@ -43,7 +42,7 @@ export function CharacterListPage() {
             <button
               onClick={() => goToPage(page - 1)}
               disabled={page === 1}
-              className="flex items-center gap-1 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="flex items-center gap-1 px-3 md:px-4 py-2 bg-white border border-gray-200 rounded text-sm text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -67,9 +66,9 @@ export function CharacterListPage() {
                   <button
                     key={pageNum}
                     onClick={() => goToPage(pageNum)}
-                    className={`w-10 h-10 rounded-full text-sm font-medium transition-all ${
+                    className={`w-9 h-9 md:w-10 md:h-10 rounded text-sm font-medium ${
                       pageNum === page
-                        ? 'bg-red-600 text-white shadow-lg shadow-red-600/30'
+                        ? 'bg-[#005CAF] text-white'
                         : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
                     }`}
                   >
@@ -82,7 +81,7 @@ export function CharacterListPage() {
             <button
               onClick={() => goToPage(page + 1)}
               disabled={page === result.totalPages}
-              className="flex items-center gap-1 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="flex items-center gap-1 px-3 md:px-4 py-2 bg-white border border-gray-200 rounded text-sm text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               次へ
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,7 +92,7 @@ export function CharacterListPage() {
         )}
 
         {/* Stats */}
-        <div className="text-center mt-8 text-sm text-gray-400">
+        <div className="text-center mt-6 text-sm text-gray-400">
           全 {result.total} キャラクター中 {(page - 1) * PAGE_SIZE + 1}-{Math.min(page * PAGE_SIZE, result.total)} を表示
         </div>
       </div>

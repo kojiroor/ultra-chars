@@ -1,15 +1,30 @@
 @import "tailwindcss";
 
+/* デジタル庁デザインシステムベース */
 :root {
-  --color-primary: #1d1d1f;
-  --color-secondary: #86868b;
-  --color-accent: #e60012;
-  --color-bg: #fbfbfd;
-  --color-card: #ffffff;
-  --color-border: #d2d2d7;
+  /* カラー */
+  --color-primary: #005CAF;
+  --color-primary-hover: #004A8C;
+  --color-secondary: #5C6BC0;
+  --color-accent: #E60012;
+  --color-bg: #F5F5F5;
+  --color-surface: #FFFFFF;
+  --color-border: #E0E0E0;
+  --color-text: #333333;
+  --color-text-secondary: #666666;
+  --color-text-disabled: #999999;
+  
+  /* スペーシング */
+  --spacing-unit: 8px;
+  
+  /* 角丸 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
 }
 
-* {
+/* リセット */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,36 +32,85 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", Meiryo, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-bg);
-  color: var(--color-primary);
-  line-height: 1.5;
 }
 
-/* Apple-like Typography */
+/* タイポグラフィ */
 h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+
+p {
+  color: var(--color-text-secondary);
+}
+
+/* リンク */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* ボタン */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-md);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* Smooth transitions */
-a, button {
-  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
 }
 
-/* Custom scrollbar */
+/* カード */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* スクロールバー */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -55,5 +119,17 @@ a, button {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-secondary);
+  background: var(--color-text-disabled);
+}
+
+/* フォーカス */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 選択 */
+::selection {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
 }
