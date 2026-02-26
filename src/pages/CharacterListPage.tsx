@@ -17,40 +17,49 @@ export function CharacterListPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5]">
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
+    <main id="main-content" className="bg-gray-50 min-h-screen py-8 md:py-12">
+      <div className="container">
         {/* Header */}
-        <div className="mb-8 md:mb-12">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+        <header className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             キャラクター一覧
           </h1>
-          <p className="text-sm md:text-base text-gray-600">
-            歴代ウルトラマンシリーズに登場する光の巨人たち
+          <p className="text-gray-600 max-w-xl mx-auto">
+            歴代ウルトラマンシリーズに登場する光の巨人たち。
+            昭和、平成、新生代を網羅したデータベースです。
           </p>
-        </div>
+        </header>
 
         {/* Character Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
-          {result.items.map((character) => (
-            <CharacterCard key={character.id} character={character} />
-          ))}
-        </div>
+        <section aria-label="キャラクターリスト">
+          <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
+            {result.items.map((character) => (
+              <li key={character.id}>
+                <CharacterCard character={character} />
+              </li>
+            ))}
+          </ul>
+        </section>
 
         {/* Pagination */}
         {result.totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2">
+          <nav 
+            aria-label="ページネーション"
+            className="flex justify-center items-center gap-2"
+          >
             <button
               onClick={() => goToPage(page - 1)}
               disabled={page === 1}
-              className="flex items-center gap-1 px-3 md:px-4 py-2 bg-white border border-gray-200 rounded text-sm text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn btn-secondary"
+              aria-label="前のページ"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
               前へ
             </button>
             
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1" role="group" aria-label="ページ番号">
               {Array.from({ length: Math.min(5, result.totalPages) }, (_, i) => {
                 let pageNum;
                 if (result.totalPages <= 5) {
@@ -66,11 +75,13 @@ export function CharacterListPage() {
                   <button
                     key={pageNum}
                     onClick={() => goToPage(pageNum)}
-                    className={`w-9 h-9 md:w-10 md:h-10 rounded text-sm font-medium ${
+                    className={`w-10 h-10 rounded-full text-sm font-medium transition-all ${
                       pageNum === page
-                        ? 'bg-[#005CAF] text-white'
-                        : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+                        ? 'btn-primary'
+                        : 'btn-secondary'
                     }`}
+                    aria-label={`${pageNum}ページ`}
+                    aria-current={pageNum === page ? 'page' : undefined}
                   >
                     {pageNum}
                   </button>
@@ -81,21 +92,22 @@ export function CharacterListPage() {
             <button
               onClick={() => goToPage(page + 1)}
               disabled={page === result.totalPages}
-              className="flex items-center gap-1 px-3 md:px-4 py-2 bg-white border border-gray-200 rounded text-sm text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn btn-secondary"
+              aria-label="次のページ"
             >
               次へ
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
-          </div>
+          </nav>
         )}
 
         {/* Stats */}
-        <div className="text-center mt-6 text-sm text-gray-400">
-          全 {result.total} キャラクター中 {(page - 1) * PAGE_SIZE + 1}-{Math.min(page * PAGE_SIZE, result.total)} を表示
-        </div>
+        <p className="text-center mt-8 text-sm text-gray-400">
+          全 {result.total} キャラクター中 {Math.min((page - 1) * PAGE_SIZE + 1, result.total)}-{Math.min(page * PAGE_SIZE, result.total)} を表示
+        </p>
       </div>
-    </div>
+    </main>
   );
 }

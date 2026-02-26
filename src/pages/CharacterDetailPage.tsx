@@ -7,34 +7,38 @@ export function CharacterDetailPage() {
 
   if (!character) {
     return (
-      <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center">
-        <div className="text-center bg-white rounded-lg p-8 border border-gray-200 max-w-md mx-4">
-          <h1 className="text-xl font-bold text-gray-900 mb-2">キャラクターが見つかりません</h1>
-          <p className="text-gray-500 mb-6">指定されたキャラクターは存在しません。</p>
+      <main id="main-content" className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <div className="text-center bg-white rounded-lg border border-gray-200 p-8 max-w-md">
+          <h1 className="text-xl font-bold text-gray-900 mb-2">
+            キャラクターが見つかりません
+          </h1>
+          <p className="text-gray-600 mb-6">
+            指定されたキャラクターは存在しません。
+          </p>
           <Link
             to="/characters"
-            className="inline-flex items-center gap-2 text-[#005CAF] hover:text-[#004A8C] font-medium"
+            className="btn btn-primary"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            キャラクター一覧に戻る
+            キャラクター一覧へ
           </Link>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5]">
-      <div className="max-w-4xl mx-auto px-4 md:px-6 py-6 md:py-8">
+    <main id="main-content" className="min-h-screen bg-gray-50 py-6 md:py-8">
+      <div className="container max-w-4xl">
         {/* パンくず */}
-        <nav className="mb-6">
+        <nav aria-label="パンくずリスト" className="mb-6">
           <Link
             to="/characters"
-            className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-[#005CAF] transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-[#005CAF]"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             キャラクター一覧に戻る
@@ -42,7 +46,7 @@ export function CharacterDetailPage() {
         </nav>
 
         {/* メインカード */}
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <article className="bg-white rounded-lg border border-gray-200 overflow-hidden">
           <div className="md:flex">
             {/* 画像 */}
             <div className="md:w-1/2 aspect-square md:aspect-auto bg-gray-100 flex items-center justify-center p-6 md:p-8">
@@ -55,7 +59,7 @@ export function CharacterDetailPage() {
                   target.style.display = 'none';
                   target.parentElement!.innerHTML = `
                     <div class="flex flex-col items-center justify-center w-full h-full text-gray-300">
-                      <svg class="w-24 h-24 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg class="w-24 h-24 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                       <span class="text-lg font-medium">${character.name}</span>
@@ -67,14 +71,16 @@ export function CharacterDetailPage() {
 
             {/* 情報 */}
             <div className="md:w-1/2 p-6 md:p-8">
-              <span className="text-sm font-medium text-[#005CAF] mb-2 block">{character.series}</span>
+              <span className="text-sm font-medium text-[#005CAF] mb-2 block">
+                {character.series}
+              </span>
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
                 {character.name}
               </h1>
               
               {/* スペック */}
-              <div className="border-t border-gray-200 pt-4 mb-6">
-                <h2 className="text-sm font-semibold text-gray-500 mb-3">基本情報</h2>
+              <section className="border-t border-gray-200 pt-4 mb-6">
+                <h2 className="sr-only">基本情報</h2>
                 <dl className="space-y-3">
                   <div className="flex">
                     <dt className="w-20 text-sm text-gray-500">身長</dt>
@@ -85,19 +91,19 @@ export function CharacterDetailPage() {
                     <dd className="text-sm font-medium text-gray-900">{character.weight}</dd>
                   </div>
                 </dl>
-              </div>
+              </section>
 
               {/* 解説 */}
-              <div className="border-t border-gray-200 pt-4">
+              <section className="border-t border-gray-200 pt-4">
                 <h2 className="text-sm font-semibold text-gray-500 mb-3">解説</h2>
-                <p className="text-sm text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed">
                   {character.description}
                 </p>
-              </div>
+              </section>
             </div>
           </div>
-        </div>
+        </article>
       </div>
-    </div>
+    </main>
   );
 }
