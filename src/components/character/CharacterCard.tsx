@@ -17,8 +17,6 @@ export function CharacterCard({ character }: CharacterCardProps) {
       <Card className="h-full overflow-hidden group hover:shadow-lg transition-shadow cursor-pointer">
         <div 
           className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden"
-          role="img"
-          aria-label={character.name}
         >
           <img
             src={character.image}
