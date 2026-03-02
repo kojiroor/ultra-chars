@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { CharacterCard } from '../components/character/CharacterCard';
 import { getCharacters } from '../data/characters';
 
@@ -24,7 +26,7 @@ export function CharacterListPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             キャラクター一覧
           </h1>
-          <p className="text-gray-600 max-w-xl mx-auto">
+          <p className="text-muted-foreground max-w-xl mx-auto">
             歴代ウルトラマンシリーズに登場する光の巨人たち。
             昭和、平成、新生代を網羅したデータベースです。
           </p>
@@ -47,17 +49,15 @@ export function CharacterListPage() {
             aria-label="ページネーション"
             className="flex justify-center items-center gap-2"
           >
-            <button
+            <Button
+              variant="outline"
               onClick={() => goToPage(page - 1)}
               disabled={page === 1}
-              className="btn btn-secondary"
               aria-label="前のページ"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
+              <ChevronLeft className="w-4 h-4" />
               前へ
-            </button>
+            </Button>
             
             <div className="flex items-center gap-1" role="group" aria-label="ページ番号">
               {Array.from({ length: Math.min(5, result.totalPages) }, (_, i) => {
@@ -72,39 +72,34 @@ export function CharacterListPage() {
                   pageNum = page - 2 + i;
                 }
                 return (
-                  <button
+                  <Button
                     key={pageNum}
+                    variant={pageNum === page ? "default" : "outline"}
+                    size="icon"
                     onClick={() => goToPage(pageNum)}
-                    className={`w-10 h-10 rounded-full text-sm font-medium transition-all ${
-                      pageNum === page
-                        ? 'btn-primary'
-                        : 'btn-secondary'
-                    }`}
                     aria-label={`${pageNum}ページ`}
                     aria-current={pageNum === page ? 'page' : undefined}
                   >
                     {pageNum}
-                  </button>
+                  </Button>
                 );
               })}
             </div>
 
-            <button
+            <Button
+              variant="outline"
               onClick={() => goToPage(page + 1)}
               disabled={page === result.totalPages}
-              className="btn btn-secondary"
               aria-label="次のページ"
             >
               次へ
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+              <ChevronRight className="w-4 h-4" />
+            </Button>
           </nav>
         )}
 
         {/* Stats */}
-        <p className="text-center mt-8 text-sm text-gray-400">
+        <p className="text-center mt-8 text-sm text-muted-foreground">
           全 {result.total} キャラクター中 {Math.min((page - 1) * PAGE_SIZE + 1, result.total)}-{Math.min(page * PAGE_SIZE, result.total)} を表示
         </p>
       </div>
