@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { CharacterCard } from '../components/character/CharacterCard';
+import { Button } from '@/components/ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { getCharacters } from '../data/characters';
 
 const PAGE_SIZE = 12;
@@ -19,38 +19,35 @@ export function CharacterListPage() {
   };
 
   return (
-    <main id="main-content" className="bg-gray-50 min-h-screen py-8 md:py-12">
-      <div className="container">
+    <main id="main-content" className="min-h-screen bg-muted/30">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-12">
         {/* Header */}
-        <header className="text-center mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
             キャラクター一覧
           </h1>
-          <p className="text-muted-foreground max-w-xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             歴代ウルトラマンシリーズに登場する光の巨人たち。
-            昭和、平成、新生代を網羅したデータベースです。
+            昭和、平成、新生代を網羅したデータベース。
           </p>
-        </header>
+        </div>
 
         {/* Character Grid */}
-        <section aria-label="キャラクターリスト">
-          <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
-            {result.items.map((character) => (
-              <li key={character.id}>
-                <CharacterCard character={character} />
-              </li>
-            ))}
-          </ul>
-        </section>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
+          {result.items.map((character) => (
+            <CharacterCard key={character.id} character={character} />
+          ))}
+        </div>
 
         {/* Pagination */}
         {result.totalPages > 1 && (
           <nav 
-            aria-label="ページネーション"
             className="flex justify-center items-center gap-2"
+            aria-label="ページネーション"
           >
             <Button
               variant="outline"
+              size="sm"
               onClick={() => goToPage(page - 1)}
               disabled={page === 1}
               aria-label="前のページ"
@@ -59,7 +56,7 @@ export function CharacterListPage() {
               前へ
             </Button>
             
-            <div className="flex items-center gap-1" role="group" aria-label="ページ番号">
+            <div className="flex items-center gap-1">
               {Array.from({ length: Math.min(5, result.totalPages) }, (_, i) => {
                 let pageNum;
                 if (result.totalPages <= 5) {
@@ -78,7 +75,7 @@ export function CharacterListPage() {
                     size="icon"
                     onClick={() => goToPage(pageNum)}
                     aria-label={`${pageNum}ページ`}
-                    aria-current={pageNum === page ? 'page' : undefined}
+                    aria-current={pageNum === page ? "page" : undefined}
                   >
                     {pageNum}
                   </Button>
@@ -88,6 +85,7 @@ export function CharacterListPage() {
 
             <Button
               variant="outline"
+              size="sm"
               onClick={() => goToPage(page + 1)}
               disabled={page === result.totalPages}
               aria-label="次のページ"
@@ -100,7 +98,7 @@ export function CharacterListPage() {
 
         {/* Stats */}
         <p className="text-center mt-8 text-sm text-muted-foreground">
-          全 {result.total} キャラクター中 {Math.min((page - 1) * PAGE_SIZE + 1, result.total)}-{Math.min(page * PAGE_SIZE, result.total)} を表示
+          全 {result.total} キャラクター中 {(page - 1) * PAGE_SIZE + 1}-{Math.min(page * PAGE_SIZE, result.total)} を表示
         </p>
       </div>
     </main>

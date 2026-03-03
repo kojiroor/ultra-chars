@@ -14,10 +14,10 @@ export function TopPage() {
           className="w-20 h-20 rounded-full bg-primary flex items-center justify-center mx-auto mb-8"
           aria-hidden="true"
         >
-          <span className="text-white text-4xl">●</span>
+          <span className="text-primary-foreground text-4xl">●</span>
         </div>
         
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
           ウルトラマン図鑑
         </h1>
         
@@ -25,7 +25,7 @@ export function TopPage() {
           Ultra Character Viewer
         </p>
         
-        <p className="text-gray-600 mb-10 max-w-lg mx-auto leading-relaxed">
+        <p className="text-muted-foreground mb-10 max-w-lg mx-auto leading-relaxed">
           昭和から最新作まで、歴代ウルトラマンの情報を網羅したデータベースです。
           光の国の戦士たちの物語を探求しましょう。
         </p>
@@ -41,15 +41,15 @@ export function TopPage() {
         <dl className="mt-16 grid grid-cols-3 gap-8 max-w-md mx-auto">
           <div>
             <dt className="text-sm text-muted-foreground mb-1">キャラクター</dt>
-            <dd className="text-3xl font-bold text-gray-900">24+</dd>
+            <dd className="text-3xl font-bold">24+</dd>
           </div>
           <div>
             <dt className="text-sm text-muted-foreground mb-1">年の歴史</dt>
-            <dd className="text-3xl font-bold text-gray-900">50+</dd>
+            <dd className="text-3xl font-bold">50+</dd>
           </div>
           <div>
             <dt className="text-sm text-muted-foreground mb-1">勇気</dt>
-            <dd className="text-3xl font-bold text-gray-900">∞</dd>
+            <dd className="text-3xl font-bold">∞</dd>
           </div>
         </dl>
       </div>
