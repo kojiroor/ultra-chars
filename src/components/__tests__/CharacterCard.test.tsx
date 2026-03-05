@@ -9,6 +9,9 @@ const mockCharacter: Character = {
   name: 'Test Character',
   image: '/test-image.png',
   description: 'Test description',
+  series: 'Test Series',
+  height: '50m',
+  weight: '35,000t',
 };
 
 describe('CharacterCard', () => {
@@ -27,8 +30,10 @@ describe('CharacterCard', () => {
         <CharacterCard character={mockCharacter} />
       </MemoryRouter>
     );
-    const img = screen.getByRole('img', { name: 'Test Character' });
-    expect(img).toHaveAttribute('src', '/test-image.png');
+    const imgs = screen.getAllByRole('img', { name: 'Test Character' });
+    // Find the actual <img> element (not the container div with role="img")
+    const imgElement = imgs.find(el => el.tagName === 'IMG');
+    expect(imgElement).toHaveAttribute('src', '/test-image.png');
   });
 
   it('links to character detail page', () => {
